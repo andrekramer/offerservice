@@ -1,0 +1,10 @@
+printf "create\n"
+curl -H "Content-type: application/json" -X POST -d '{"vendor": "acme", "name": "MyWidget", "description": "Best Widget ever!", "price":9.99, "currency": "USD", "expiresAt":9223372036854775807 }' http://localhost:8080/offers
+curl -H "Content-type: application/json" -X POST -d '{"vendor": "acme", "name": "MyWidget2", "description": "Second best Widget ever!", "price":9.99, "currency": "USD", "expiresAt":9223372036854775807 }' http://localhost:8080/offers
+printf "\nlist all\n"
+curl http://localhost:8080/offers
+printf "\nlist one\n"
+curl http://localhost:8080/offers/acme/MyWidget
+printf "\ndelete\n"
+curl -X DELETE http://localhost:8080/offers/acme/MyWidget
+printf "\ndone\n"
