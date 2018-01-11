@@ -44,7 +44,7 @@ class OfferRegistryActor extends Actor with ActorLogging {
       sender() ! Offers(offers.toSeq.filter(_.expiresAt > currentTime))
 
     case CreateOffer(offer) =>
-      context.become(receiveProcess(offers.filter(_.name != offer.name) + offer))
+      context.become(receiveProcess(offers.filterNot(o => o.vendor == offer.vendor && o.name == offer.name) + offer))
       sender() ! ActionPerformed(s"Offer ${offer.name} created.")
 
     case GetOffer(vendor, name) =>
